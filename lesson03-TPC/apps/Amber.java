@@ -14,4 +14,8 @@ public class Amber {
     static {
         DEFAULT_CHECKED = LocalDate.now();
     }
+
+    static void foo() {
+        System.out.println(DEFAULT_AUTHOR);
+    }
 }
