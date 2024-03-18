@@ -6,3 +6,4 @@ plugins {
 rootProject.name = "lae-2024-i41d"
 include("lesson09-reflect")
 include("lesson09-TPC")
+include("lesson10-logger")
