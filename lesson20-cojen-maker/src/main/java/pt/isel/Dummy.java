@@ -1,7 +1,7 @@
 package pt.isel;
 
 public class Dummy {
-    final int nr;
+    private final int nr;
 
     public Dummy(int nr) {
         this.nr = nr;
