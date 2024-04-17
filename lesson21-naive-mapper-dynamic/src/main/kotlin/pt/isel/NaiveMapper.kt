@@ -9,7 +9,7 @@ import kotlin.reflect.full.memberProperties
 /**
  * 3rd version
  */
-class NaiveMapper<T : Any> private constructor(val srcType: KClass<*>, val destType:KClass<T>) {
+class NaiveMapper<T : Any> private constructor(val srcType: KClass<*>, val destType:KClass<T>) : Mapper<T> {
     companion object {
         private val mappers = mutableMapOf<Pair<KClass<*>, KClass<*>>, NaiveMapper<*>>()
 
@@ -49,7 +49,7 @@ class NaiveMapper<T : Any> private constructor(val srcType: KClass<*>, val destT
      * 3rd - Get the values of properties from source and pass them
      * to te constructor through the callBy()
      */
-    fun mapFrom(src: Any) : T {
+    override fun mapFrom(src: Any) : T {
         val args: Map<KParameter, Any?> = args
             .map { pair ->
                 val propVal = pair.value?.call(src)

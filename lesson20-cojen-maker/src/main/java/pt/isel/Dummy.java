@@ -11,3 +11,10 @@ public class Dummy {
         return this.nr * other;
     }
 }
+
+class Bar {
+    static void test() {
+        AppKt.foo("label", 341341);
+        AppKt.foo("ola");
+    }
+}

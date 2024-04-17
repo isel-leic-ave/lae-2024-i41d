@@ -7,10 +7,17 @@ import kotlin.reflect.full.memberFunctions
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.full.primaryConstructor
 
+@JvmOverloads
+fun foo(label: String, nr: Int = 7) {
+}
+
 
 class Student(val name: String, val nr: Int)
 
 fun main() {
+    foo("ola")
+    foo("ola", 11)
+
     // switchJavaKotlinReflect(Student("Maria", 73641))
 
     ClassMaker
