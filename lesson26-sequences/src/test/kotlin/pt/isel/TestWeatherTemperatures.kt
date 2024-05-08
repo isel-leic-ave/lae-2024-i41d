@@ -59,12 +59,12 @@ class TestWeatherTemperatures {
         //assertEquals("Light rain shower", desc)
         assertEquals(37, iters)
     }
-    @Test fun firstDescriptionInWindyDaysAsSequence() {
+    @Test fun firstDescriptionInWindyDaysAsSequenceWithoutTerminalOperation() {
         var iters = 0
         val desc = weatherData
             .asSequence()
             .filter { iters++; it.windspeedKmph > 22 }
-            .map { iters++; it.weatherDesc }
+            .lazyMap { iters++; it.weatherDesc }
             // .first()
         // assertEquals("Light rain shower", desc)
         /**
@@ -72,4 +72,27 @@ class TestWeatherTemperatures {
          */
         assertEquals(0, iters)
     }
+    @Test fun firstDescriptionInWindyDaysAsSequence() {
+        var iters = 0
+        val desc = weatherData
+            .asSequence()
+            .filter { iters++; it.windspeedKmph > 22 }
+            .lazyMap { iters++; it.weatherDesc }
+            .first()
+        assertEquals("Light rain shower", desc)
+        assertEquals(5, iters)
+    }
+    @Test fun countDistinctDescriptionsInRainyDaysFilterMapLazy() {
+        var iters = 0
+        val size = weatherData
+            .asSequence()
+            .filter { iters++; it.weatherDesc.lowercase().contains("rain") }
+            .lazyMap { iters++; it.weatherDesc }
+            .lazyDistinct()
+            .onEach { println(it) }
+            .count()
+        assertEquals(5, size)
+        assertEquals(48, iters)
+    }
+
 }
