@@ -40,6 +40,9 @@ fun <T, R> Sequence<T>.lazyMap(transform: (T) -> R) : Sequence<R> {
     }
 }
 
+/**
+ * DOES NOT SUPPORT Sequences with null elements
+ */
 fun <T> Sequence<T>.lazyDistinct() : Sequence<T> {
     return object : Sequence<T> {
         override fun iterator(): Iterator<T> {

@@ -1,6 +1,7 @@
 package pt.isel
 
 import org.junit.jupiter.api.Test
+import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 
 /*
@@ -94,5 +95,13 @@ class TestWeatherTemperatures {
         assertEquals(5, size)
         assertEquals(48, iters)
     }
+    @Test fun testDistinctOnNulls() {
+        val actual = sequenceOf(1, 2, 4, 2, 2, 5, null, null, 3, 7, 9, null, null)
+            .lazyDistinct()
 
+        assertContentEquals(
+            sequenceOf(1,2,4,5,null,3,7,9,),
+            actual
+        )
+    }
 }
