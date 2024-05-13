@@ -148,21 +148,27 @@ class TestWeatherTemperatures {
 
     @Test fun checkCollapse() {
 
-        val res = sequenceOf(7, 6, 5, 5, 6, 6, 7, 5)
+        val res = sequenceOf(null, 7, 6, 5, 5, null, null, 6, 6, 7, 5)
             .collapse() // Merges series of adjacent elements
         assertContentEquals(
-            sequenceOf(7,6,5,6,7,5),
+            sequenceOf(null, 7,6,5,null, 6,7,5),
             res
         )
     }
 
     @Test fun checkConcat() {
         // <=> sequenceOf(7,6,5) + sequenceOf(3,4)
-        val res = sequenceOf(7,6,5).concat(sequenceOf(3,4))
+        val res = sequenceOf(7,6,5,7,6).concat(sequenceOf(3,4))
         assertContentEquals(
-            sequenceOf(7,6,5,3,4),
+            sequenceOf(7,6,5,7,6,3,4),
             res
         )
+    }
+
+    fun barSequence() = sequence {
+        yield("primeiro")
+        yield("segundo")
+        yield("terceiro")
     }
 }
 

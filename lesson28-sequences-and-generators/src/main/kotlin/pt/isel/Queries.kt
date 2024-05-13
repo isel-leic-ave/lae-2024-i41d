@@ -116,8 +116,27 @@ fun <T> Sequence<T>.suspendDistinct() : Sequence<T> {
 }
 
 fun <T> Sequence<T>.concat(other: Sequence<T>) : Sequence<T> {
-    TODO()
+    return sequence {
+        for (item in this@concat) {
+                yield(item)
+        }
+        for (item in other){
+                yield(item)
+        }
+
+    }
 }
+
 fun <T> Sequence<T>.collapse() : Sequence<T> {
-    TODO()
+    return sequence {
+        val iter = this@collapse.iterator()
+        var curr: T? = null
+        while (iter.hasNext()){
+            val item = iter.next()
+            if(item != curr) {
+                curr = item
+                yield(item)
+            }
+        }
+    }
 }
